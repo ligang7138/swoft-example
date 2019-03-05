@@ -39,6 +39,9 @@ class AdminUsersDao
 
     public function getUserInfo($aid)
     {
+//        echo env(API_SECRET).PHP_EOL;
+//        echo env('PFILE').PHP_EOL;
+//        echo env('@runtime').PHP_EOL;
 //        $this->getDao();
         $result = $this->cache->get('adminUserDao:'.$aid);
         if (empty($result)) {
@@ -54,7 +57,7 @@ class AdminUsersDao
             }
             return $result;
         } else {
-            throw new \Exception("存进去了");
+//            throw new \Exception("存进去了");
             return $result;
         }
     }
