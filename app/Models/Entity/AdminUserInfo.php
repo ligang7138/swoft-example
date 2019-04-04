@@ -26,20 +26,20 @@ class AdminUserInfo extends Model
     private $aId;
 
     /**
-     * @var string $aTrueName '姓名'
+     * @var string $aTrueName 姓名
      * @Column(name="a_true_name", type="string", length=45, default="")
      */
     private $aTrueName;
 
     /**
-     * @var string $aIdentNo '身份证'
-     * @Column(name="a_ident_no", type="string", length=20, default="")
+     * @var string $aIdentNo 身份证
+     * @Column(name="a_ident_no", type="string", length=20)
      */
     private $aIdentNo;
 
     /**
-     * @var string $aPhone '手机号'
-     * @Column(name="a_phone", type="string", length=20, default="")
+     * @var string $aPhone 手机号
+     * @Column(name="a_phone", type="string", length=20)
      */
     private $aPhone;
 
@@ -57,12 +57,6 @@ class AdminUserInfo extends Model
     private $aiId;
 
     /**
-     * @var string $aiType 管理员对应项目【对应多个项目用英文逗号分隔开】
-     * @Column(name="ai_type", type="string", length=45)
-     */
-    private $aiType;
-
-    /**
      * @var string $aiServiceNo 服务编号
      * @Column(name="ai_service_no", type="string", length=15)
      */
@@ -71,7 +65,6 @@ class AdminUserInfo extends Model
     /**
      * @var string $aiEmail 邮件地址
      * @Column(name="ai_email", type="string", length=60)
-     * @Required()
      */
     private $aiEmail;
 
@@ -86,12 +79,6 @@ class AdminUserInfo extends Model
      * @Column(name="a_card_no", type="string", length=30, default="")
      */
     private $aCardNo;
-
-    /**
-     * @var string $aLiveAddress 居住地址（省市县）
-     * @Column(name="a_live_address", type="string", length=100, default="")
-     */
-    private $aLiveAddress;
 
     /**
      * @var int $aProvince 商户省份
@@ -119,18 +106,18 @@ class AdminUserInfo extends Model
 
     /**
      * @var string $aHomePhone 住宅电话
-     * @Column(name="a_home_phone", type="string", length=20, default="")
+     * @Column(name="a_home_phone", type="string", length=30, default="")
      */
     private $aHomePhone;
 
     /**
-     * @var string $aMaritalStatus 婚姻状况 10 : "未婚", 20 : "已婚", 30 : "丧偶", 40 : "离异"
+     * @var string $aMaritalStatus 婚姻状况【10未婚，20已婚，30丧偶，40 离异】
      * @Column(name="a_marital_status", type="char", length=3, default="10")
      */
     private $aMaritalStatus;
 
     /**
-     * @var string $aDegree 教育程度 10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下
+     * @var string $aDegree 教育程度【10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下】
      * @Column(name="a_degree", type="char", length=3, default="")
      */
     private $aDegree;
@@ -154,6 +141,12 @@ class AdminUserInfo extends Model
     private $aBankBranchName;
 
     /**
+     * @var int $dtId 部门ID
+     * @Column(name="dt_id", type="integer")
+     */
+    private $dtId;
+
+    /**
      * @param int $value
      * @return $this
      */
@@ -165,7 +158,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '姓名'
+     * 姓名
      * @param string $value
      * @return $this
      */
@@ -177,7 +170,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '身份证'
+     * 身份证
      * @param string $value
      * @return $this
      */
@@ -189,7 +182,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '手机号'
+     * 手机号
      * @param string $value
      * @return $this
      */
@@ -219,18 +212,6 @@ class AdminUserInfo extends Model
     public function setAiId(int $value)
     {
         $this->aiId = $value;
-
-        return $this;
-    }
-
-    /**
-     * 管理员对应项目【对应多个项目用英文逗号分隔开】
-     * @param string $value
-     * @return $this
-     */
-    public function setAiType(string $value): self
-    {
-        $this->aiType = $value;
 
         return $this;
     }
@@ -279,18 +260,6 @@ class AdminUserInfo extends Model
     public function setACardNo(string $value): self
     {
         $this->aCardNo = $value;
-
-        return $this;
-    }
-
-    /**
-     * 居住地址（省市县）
-     * @param string $value
-     * @return $this
-     */
-    public function setALiveAddress(string $value): self
-    {
-        $this->aLiveAddress = $value;
 
         return $this;
     }
@@ -356,7 +325,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * 婚姻状况 10 : "未婚", 20 : "已婚", 30 : "丧偶", 40 : "离异"
+     * 婚姻状况【10未婚，20已婚，30丧偶，40 离异】
      * @param string $value
      * @return $this
      */
@@ -368,7 +337,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * 教育程度 10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下
+     * 教育程度【10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下】
      * @param string $value
      * @return $this
      */
@@ -416,6 +385,18 @@ class AdminUserInfo extends Model
     }
 
     /**
+     * 部门ID
+     * @param int $value
+     * @return $this
+     */
+    public function setDtId(int $value): self
+    {
+        $this->dtId = $value;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getAId()
@@ -424,7 +405,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '姓名'
+     * 姓名
      * @return string
      */
     public function getATrueName()
@@ -433,7 +414,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '身份证'
+     * 身份证
      * @return string
      */
     public function getAIdentNo()
@@ -442,7 +423,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * '手机号'
+     * 手机号
      * @return string
      */
     public function getAPhone()
@@ -465,15 +446,6 @@ class AdminUserInfo extends Model
     public function getAiId()
     {
         return $this->aiId;
-    }
-
-    /**
-     * 管理员对应项目【对应多个项目用英文逗号分隔开】
-     * @return string
-     */
-    public function getAiType()
-    {
-        return $this->aiType;
     }
 
     /**
@@ -510,15 +482,6 @@ class AdminUserInfo extends Model
     public function getACardNo()
     {
         return $this->aCardNo;
-    }
-
-    /**
-     * 居住地址（省市县）
-     * @return string
-     */
-    public function getALiveAddress()
-    {
-        return $this->aLiveAddress;
     }
 
     /**
@@ -567,7 +530,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * 婚姻状况 10 : "未婚", 20 : "已婚", 30 : "丧偶", 40 : "离异"
+     * 婚姻状况【10未婚，20已婚，30丧偶，40 离异】
      * @return mixed
      */
     public function getAMaritalStatus()
@@ -576,7 +539,7 @@ class AdminUserInfo extends Model
     }
 
     /**
-     * 教育程度 10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下
+     * 教育程度【10 : 研究生及以上, 20 : 本科,30 : 专科,40 : 中等技术学校,50 : 技术学校, 60 : 高中,70 : 初中,80 : 小学,90 : 小学及以下】
      * @return string
      */
     public function getADegree()
@@ -609,6 +572,15 @@ class AdminUserInfo extends Model
     public function getABankBranchName()
     {
         return $this->aBankBranchName;
+    }
+
+    /**
+     * 部门ID
+     * @return int
+     */
+    public function getDtId()
+    {
+        return $this->dtId;
     }
 
 }

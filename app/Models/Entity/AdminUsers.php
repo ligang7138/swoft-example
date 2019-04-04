@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of Swoft.
+ *
+ * @link     https://swoft.org
+ * @document https://doc.swoft.org
+ * @contact  group@swoft.org
+ * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ */
 namespace App\Models\Entity;
 
 use Swoft\Db\Model;
@@ -7,7 +15,6 @@ use Swoft\Db\Bean\Annotation\Entity;
 use Swoft\Db\Bean\Annotation\Id;
 use Swoft\Db\Bean\Annotation\Required;
 use Swoft\Db\Bean\Annotation\Table;
-use Swoft\Db\Types;
 
 /**
  * 后台用户表
@@ -19,28 +26,28 @@ use Swoft\Db\Types;
 class AdminUsers extends Model
 {
     /**
-     * @var int $aId 
+     * @var int $aId
      * @Id()
      * @Column(name="a_id", type="integer")
      */
     private $aId;
 
     /**
-     * @var string $aName 
+     * @var string $aName
      * @Column(name="a_name", type="string", length=45)
      * @Required()
      */
     private $aName;
 
     /**
-     * @var string $aPwd 
+     * @var string $aPwd
      * @Column(name="a_pwd", type="string", length=800)
      * @Required()
      */
     private $aPwd;
 
     /**
-     * @var string $aLoginTime 
+     * @var string $aLoginTime
      * @Column(name="a_login_time", type="datetime")
      */
     private $aLoginTime;
@@ -52,25 +59,19 @@ class AdminUsers extends Model
     private $aStatus;
 
     /**
-     * @var string $aRoles 2 销售管理员，3销售主管，4销售员
+     * @var string $aRoles 2 销售管理员，3销售主管，4销售员  5审核管理员，6审核员
      * @Column(name="a_roles", type="string", length=300)
      */
     private $aRoles;
 
     /**
-     * @var string $aType 0:商户 1：管理员  2:运营，4销售，5加盟商
+     * @var string $aType 0:商户 1：管理员  2:运营，4销售，5加盟商，6审核员
      * @Column(name="a_type", type="string", length=1, default="0")
      */
     private $aType;
 
     /**
-     * @var string $aPartnerType 商户类型 1.个人 2.企业
-     * @Column(name="a_partner_type", type="char", length=1, default="1")
-     */
-    private $aPartnerType;
-
-    /**
-     * @var string $aAddTime 
+     * @var string $aAddTime
      * @Column(name="a_add_time", type="datetime", default="CURRENT_TIMESTAMP")
      */
     private $aAddTime;
@@ -144,7 +145,7 @@ class AdminUsers extends Model
     }
 
     /**
-     * 2 销售管理员，3销售主管，4销售员
+     * 2 销售管理员，3销售主管，4销售员  5审核管理员，6审核员
      * @param string $value
      * @return $this
      */
@@ -156,25 +157,13 @@ class AdminUsers extends Model
     }
 
     /**
-     * 0:商户 1：管理员  2:运营，4销售，5加盟商
+     * 0:商户 1：管理员  2:运营，4销售，5加盟商，6审核员
      * @param string $value
      * @return $this
      */
     public function setAType(string $value): self
     {
         $this->aType = $value;
-
-        return $this;
-    }
-
-    /**
-     * 商户类型 1.个人 2.企业
-     * @param string $value
-     * @return $this
-     */
-    public function setAPartnerType(string $value): self
-    {
-        $this->aPartnerType = $value;
 
         return $this;
     }
@@ -256,7 +245,7 @@ class AdminUsers extends Model
     }
 
     /**
-     * 2 销售管理员，3销售主管，4销售员
+     * 2 销售管理员，3销售主管，4销售员  5审核管理员，6审核员
      * @return string
      */
     public function getARoles()
@@ -265,21 +254,12 @@ class AdminUsers extends Model
     }
 
     /**
-     * 0:商户 1：管理员  2:运营，4销售，5加盟商
+     * 0:商户 1：管理员  2:运营，4销售，5加盟商，6审核员
      * @return string
      */
     public function getAType()
     {
         return $this->aType;
-    }
-
-    /**
-     * 商户类型 1.个人 2.企业
-     * @return mixed
-     */
-    public function getAPartnerType()
-    {
-        return $this->aPartnerType;
     }
 
     /**
@@ -308,4 +288,8 @@ class AdminUsers extends Model
         return $this->opTime;
     }
 
+    public function verify($credential) : bool
+    {
+        return password_verify($credential, $this->getAPwd());
+    }
 }

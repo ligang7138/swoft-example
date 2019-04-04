@@ -23,7 +23,7 @@ use Swoft\Http\Message\Bean\Annotation\Middleware;
 use Swoft\Http\Message\Server\Request;
 use Swoft\Http\Server\Bean\Annotation\Controller;
 use Swoft\Http\Server\Bean\Annotation\RequestMapping;
-use App\Middlewares\AuthMiddleware;
+use App\Middlewares\JwtAuthMiddleware;
 
 /**
  *

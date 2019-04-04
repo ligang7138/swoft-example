@@ -21,6 +21,7 @@ use Swoft\Http\Server\Bean\Annotation\RequestMethod;
 use Swoft\View\Bean\Annotation\View;
 use Swoft\Core\Application;
 use Swoft\Http\Message\Server\Request;
+use Swoole\Coroutine\Http\Client as CoHttpClient;
 
 /**
  * 控制器demo

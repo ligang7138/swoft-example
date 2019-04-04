@@ -40,7 +40,7 @@ class AdminSaleInvite extends Model
     private $aiParent;
 
     /**
-     * @var int $aiType 类型【0商户，5加盟商，6个人 】
+     * @var int $aiType 类型【0商户，4销售，6个人 】
      * @Column(name="ai_type", type="smallint", default=6)
      */
     private $aiType;
@@ -108,7 +108,7 @@ class AdminSaleInvite extends Model
     }
 
     /**
-     * 类型【0商户，5加盟商，6个人 】
+     * 类型【0商户，4销售，6个人 】
      * @param int $value
      * @return $this
      */
@@ -194,7 +194,7 @@ class AdminSaleInvite extends Model
     }
 
     /**
-     * 类型【0商户，5加盟商，6个人 】
+     * 类型【0商户，4销售，6个人 】
      * @return mixed
      */
     public function getAiType()

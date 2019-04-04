@@ -15,7 +15,7 @@ use Swoft\App;
 
 function p($arr)
 {
-    echo '<pre/>';
+    echo PHP_EOL;
     print_r($arr);
 }
 

@@ -40,11 +40,10 @@ class BaiduMap implements MapInterface
         $params['ak'] = env('BAIDUMAP_Ak');
 
         $response = sendRequest(env('BAIDUMAP_Url').http_build_query($params), '', false, 'get');
-//        Logger::debug('channel:baidumap_geoToAddress',['request'=>$params,'response'=>$respone]);
-        //print_r($respone);
+
         $final_result = json_decode($response, true);
-        App::debug('baidu_map_75676', ['request' => 'request','response' => 'response']);
-//        App::debug('baidu_map', [$params,$final_result]);
+        // 记录日志
+        App::debug(json_encode(['request' => $params,'response' => $final_result]));
 
         if ($final_result['status'] == 0) {
             $status = 2000;
@@ -55,6 +54,5 @@ class BaiduMap implements MapInterface
         }
 
         return $result;
-//        return self::parse_data($result,$status);
     }
 }

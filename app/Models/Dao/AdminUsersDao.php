@@ -12,7 +12,6 @@ namespace App\Models\Dao;
 
 use App\Models\Entity\AdminUserInfo;
 use App\Models\Entity\AdminUsers;
-use App\Models\Entity\YsPartners;
 use Swoft\Bean\Annotation\Bean;
 use Swoft\Bean\Annotation\Inject;
 use Swoft\Cache\Cache;
@@ -52,8 +51,8 @@ class AdminUsersDao
                 ->one(['a.a_id','ai.a_true_name','p.partner_name'])
                 ->getResult();
             $bool = $this->redis->set('adminUserDao:'.$aid, $result);
-            if(!$bool){
-                throw new \Exception("存进去了");
+            if (!$bool) {
+                throw new \Exception('存进去了');
             }
             return $result;
         } else {
@@ -62,7 +61,23 @@ class AdminUsersDao
         }
     }
 
-    private function getDao(){
-        echo 4343;
+    /**
+     * @param $identity
+     * @return AdminUsers
+     */
+    public function findOneByUsername($identity)
+    {
+
+        /*$result = Query::table(AdminUsers::class, 'a')
+            ->where('a.a_name', $identity, '=')
+            ->one()
+            ->getResult(AdminUsers::class);*/
+        /** @var AdminUsers $result */
+        $result = AdminUsers::findOne(['a_name' => $identity])->getResult(AdminUsers::class);
+        return $result;
+    }
+
+    public function verify($credential)
+    {
     }
 }
