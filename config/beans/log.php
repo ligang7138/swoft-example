@@ -1,15 +1,17 @@
 <?php
-/*
+/**
  * This file is part of Swoft.
- * (c) Swoft <group@swoft.org>
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ *
+ * @link     https://swoft.org
+ * @document https://doc.swoft.org
+ * @contact  group@swoft.org
+ * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
 
 return [
     'noticeHandler'      => [
         'class'     => \Swoft\Log\FileHandler::class,
-        'logFile'   => '@runtime/logs/notice.log',
+        'logFile'   => '@runtime/logs/notice/'.date('Ymd').'.log',
         'formatter' => '${lineFormatter}',
         'levels'    => [
             \Swoft\Log\Logger::NOTICE,
@@ -30,7 +32,8 @@ return [
     'logger' => [
         'name'          => APP_NAME,
         'enable'        => env('LOG_ENABLE', false),
-        'flushInterval' => 100,
+        'flushInterval' => 1,
+//        'flushInterval' => 100,
         'flushRequest'  => true,
         'handlers'      => [
             '${noticeHandler}',
