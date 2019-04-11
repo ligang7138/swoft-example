@@ -2,10 +2,10 @@
 /**
  * This file is part of Swoft.
  *
- * @link https://swoft.org
+ * @link     https://swoft.org
  * @document https://doc.swoft.org
- * @contact group@swoft.org
- * @license https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @contact  group@swoft.org
+ * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
 
 namespace App\Exception;
@@ -20,6 +20,7 @@ use Swoft\Http\Message\Server\Response;
 use Swoft\Exception\BadMethodCallException;
 use Swoft\Exception\ValidatorException;
 use Swoft\Http\Server\Exception\BadRequestException;
+use App\Exception\MessageException;
 
 /**
  * the handler of global exception
@@ -47,9 +48,32 @@ class SwoftExceptionHandler
         $line      = $throwable->getLine();
         $code      = $throwable->getCode();
         $exception = $throwable->getMessage();
+        $data = ['msg' => $exception, 'file' => $file, 'line' => $line, 'code' => $code];
+        App::error(json_encode($data));
+        return $response->json($data);
+    }
+
+    /**
+     * @Handler(MessageException::class)
+     *
+     * @param Response   $response
+     * @param \Throwable $throwable
+     *
+     * @return Response
+     */
+    public function handlerMessageException(Response $response, \Throwable $throwable)
+    {
+        $file      = $throwable->getFile();
+        $line      = $throwable->getLine();
+        $code      = $throwable->getCode();
+        $exception = $throwable->getMessage();
 
         $data = ['msg' => $exception, 'file' => $file, 'line' => $line, 'code' => $code];
         App::error(json_encode($data));
+
+        if (!env('APP_DEBUG')) {
+            unset($data['file'],$data['line']);
+        }
         return $response->json($data);
     }
 
@@ -142,5 +166,4 @@ class SwoftExceptionHandler
 
         return view('exception/index', $data);
     }
-
 }
